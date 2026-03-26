@@ -9,6 +9,15 @@ Este proyecto contendrá **3 documentos principales** que cubren todos los aspec
 
 ### 1. **`proyecto_arquitectura.md`** - ARQUITECTURA Y DIAGRAMAS
 **Contenido:**
+- [x] Diagrama de arquitectura general
+- [ ] Flujo de operación principal (step-by-step)
+- [ ] Diagrama de comunicación entre microservicios
+- [ ] Diagrama de interconexión de microservicios
+- [ ] Estructura de directorios del proyecto
+- [ ] Diagrama de seguridad y autenticación
+- [ ] Ejemplo de dashboard y visualizaciones
+- [ ] Tech stack final recomendado
+- [ ] Próximos pasos sugeridos
 
 ### 2. **`eventos_y_schemas.md`** - EVENTOS Y ESPECIFICACIONES TÉCNICAS
 **Contenido:**
