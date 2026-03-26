@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/vulnanalytics.iml" filepath="$PROJECT_DIR$/vulnanalytics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/vulnanalytics.iml" filepath="$PROJECT_DIR$/.idea/vulnanalytics.iml" />
     </modules>
   </component>
 </project>

@@ -6,7 +6,7 @@
 ## 📐 1. DIAGRAMA DE ARQUITECTURA GENERAL
 
 ```
-![Diagrama arquitectura](./imagenes/diagrama_arquitectura.png)
+![Diagrama arquitectura](/imagenes/diagrama_arquitectura.png)
 
 ```
  
