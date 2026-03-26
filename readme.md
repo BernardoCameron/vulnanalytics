@@ -44,8 +44,34 @@ Sistema tipo **Nessus de código abierto** para escaneo de vulnerabilidades en r
 
 ## 🗂️ ESTRUCTURA DEL PROYECTO
 
-**En construcción**
-
+```
+vulnanalytics/
+│
+├── frontend/                    # React app
+│   ├── src/components
+│   ├── src/pages
+│   └── Dockerfile
+│
+├── backend/
+│   ├── api-gateway/
+│   ├── services/
+│   │   ├── ms-auth/
+│   │   ├── ms-inventario/
+│   │   ├── ms-orquestador/
+│   │   ├── ms-vulnerabilidades/
+│   │   ├── ms-hardening/
+│   │   └── ms-ia/
+│   └── shared/
+│
+├── worker/ 
+│   ├── src/
+│   │   ├── scanners/
+│   │   └── queue_consumer.py
+│   └── Dockerfile
+│
+├── docker-compose.yml          # Orquestación local
+└── docs/                        # Documentación
+```
 ---
 
 ## 🔑 CONCEPTOS CLAVE
