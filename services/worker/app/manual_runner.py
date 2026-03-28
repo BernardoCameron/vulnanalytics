@@ -7,6 +7,7 @@ from dataclasses import dataclass, asdict
 # se importan los escaneres
 from scanner.network_scanner import NetworkScanner
 from scanner.hardening_scanner import HardeningScanner
+from scanner.vuln_scanner_gvm import GVMScanner
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -25,19 +26,26 @@ class FullAuditReport:
     duration_seconds: float
     network_scan: dict   
     hardening_scan: dict 
+    vulnerability_scan: dict
 
-def run_full_audit(target: str) -> FullAuditReport:
+def run_full_audit(target: str, credentials: dict = None) -> FullAuditReport:
     """corre todo junto (nmap y hardening) y devuelve el objeto"""
     start_time = datetime.datetime.now()
     logger.info(f"Target a escanear: {target} - empezando")
 
-    logger.info("corriendo escaner de nmap")
+    logger.info("Iniciando escaneo de red (Nmap)")
     net_scanner = NetworkScanner(ports="1-1024", arguments="-T4 --open", sudo=False)
     net_result = net_scanner.scan(target)
 
-    logger.info("corriendo escaner CIS de hardening")
+    logger.info("Iniciando escaneo de configuracion (Hardening)")
     hard_scanner = HardeningScanner()
     hard_result = hard_scanner.scan()
+
+    logger.info("Iniciando escaneo de vulnerabilidades (GVM/OpenVAS)")
+    
+    # como GVM esta en otro docker, desde el worker buscamos el host local 
+    gvm_scanner = GVMScanner(gvm_host="host.docker.internal", gvm_port=9390, user="admin", password="admin")
+    gvm_result = gvm_scanner.scan(target, credentials=credentials)
 
     end_time = datetime.datetime.now()
     duration = (end_time - start_time).total_seconds()
@@ -53,7 +61,8 @@ def run_full_audit(target: str) -> FullAuditReport:
         timestamp_end=end_time.isoformat(),
         duration_seconds=round(duration, 2),
         network_scan=asdict(net_result),
-        hardening_scan=asdict(hard_result)
+        hardening_scan=asdict(hard_result),
+        vulnerability_scan=asdict(gvm_result)
     )
 
     return report
