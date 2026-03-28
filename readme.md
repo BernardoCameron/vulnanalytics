@@ -3,6 +3,17 @@
 
 ---
 
+## 🚀 ESTADO DEL PROYECTO (MVP - Worker Local)
+Llevamos avanzado lo siguiente:
+- Worker programado en Python, independiente y containerizado en Docker.
+- Script de escaneo de red con Nmap corriendo y descubriendo máquinas vivas y puertos.
+- Script de auditorías locales (Hardening) que lee linux con Lynis y procesa los logs.
+- Estructura y conexión API terminada para pedir tareas a un servidor externo de GVM (OpenVAS). 
+- Archivo compose propio para el servidor de GVM (aislado para no matar de RAM al cliente).
+- Generación de todo este reporte consolidado a un archivo JSON limpio, listo para que nuestro Backend de Java lo consuma por RabbitMQ.
+
+---
+
 ## 📚 ESTRUCTURA DE DOCUMENTACIÓN
 
 Este proyecto contendrá **3 documentos principales** que cubren todos los aspectos de la arquitectura:
@@ -67,34 +78,31 @@ Sistema tipo **Nessus de código abierto** para escaneo de vulnerabilidades en r
 
 ## 🗂️ ESTRUCTURA DEL PROYECTO
 
-```
+```text
 vulnanalytics/
 │
-├── frontend/                    # React app
-│   ├── src/components
-│   ├── src/pages
-│   └── Dockerfile
+├── frontend/                    # React app (pendiente)
 │
-├── backend/
-│   ├── api-gateway/
-│   ├── services/
-│   │   ├── ms-auth/
-│   │   ├── ms-inventario/
-│   │   ├── ms-orquestador/
-│   │   ├── ms-vulnerabilidades/
-│   │   ├── ms-hardening/
-│   │   └── ms-ia/
-│   └── shared/
+├── backend/                     # Springboot (pendiente)
 │
-├── worker/ 
-│   ├── src/
-│   │   ├── scanners/
-│   │   └── queue_consumer.py
-│   └── Dockerfile
+├── services/
+│   ├── gvm/                     # Servidor Pesado de escaneo
+│   │   └── docker-compose.yml   
+│   │
+│   └── worker/                  # Agente Python de escaneo local
+│       ├── app/
+│       │   ├── scanner/
+│       │   │   ├── network_scanner.py
+│       │   │   ├── hardening_scanner.py
+│       │   │   └── vuln_scanner_gvm.py
+│       │   ├── manual_runner.py
+│       │   └── requirements.txt
+│       ├── Dockerfile
+│       └── docker-compose-worker.yml
 │
-├── docker-compose.yml          # Orquestación local
 └── docs/                        # Documentación
 ```
+
 ---
 
 ## 🔑 CONCEPTOS CLAVE
@@ -118,5 +126,3 @@ vulnanalytics/
 - JWT para autenticación
 - Role-Based Access Control (RBAC)
 - Auditoría completa de acciones
-
----
