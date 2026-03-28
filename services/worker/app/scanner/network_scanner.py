@@ -21,8 +21,9 @@ class PortInfo:
     protocol: str          # tcp / udp
     state: str             # open / closed / filtered
     service: str           # http, ssh, etc.
-    version: str           # versión detectada si existe
+    version: str           # version detectada si existe
     product: str           # producto detectado
+    vulnerabilities_nse: dict = field(default_factory=dict) # resultados de scripts vuln de Nmap
 
 
 @dataclass
@@ -87,6 +88,7 @@ def _parse_host(nm: nmap.PortScanner, ip: str) -> HostResult:
                 service=p.get("name", ""),
                 version=p.get("version", ""),
                 product=p.get("product", ""),
+                vulnerabilities_nse=p.get("script", {}),
             ))
 
     return HostResult(
@@ -109,7 +111,7 @@ class NetworkScanner:
     """
 
     DEFAULT_PORTS = "1-1024,8080,8443,3306,5432,6379,27017,9200"
-    DEFAULT_ARGS  = "-sV -sC --open"   # versión + scripts default, solo puertos abiertos
+    DEFAULT_ARGS  = "-sV --script vuln --open"   # version + motor de vulnerabilidades agressivo
 
     def __init__(
         self,
