@@ -21,6 +21,20 @@ Este proyecto contendrá **3 documentos principales** que cubren todos los aspec
 
 ### 2. **`eventos_y_schemas.md`** - EVENTOS Y ESPECIFICACIONES TÉCNICAS
 **Contenido:**
+- [ ] Tipos de eventos definidos completamente:
+    - `job.created`
+    - `scan.started`
+    - `hosts.discovered`
+    - `vulnerabilities.detected`
+    - `hardening.checked`
+    - `scan.completed`
+    - `recommendations.generated`
+- [ ] Ejemplos JSON reales para cada evento
+- [ ] Diagrama temporal de eventos (Timeline)
+- [ ] Diagramas de casos de uso (Use Cases)
+- [ ] Endpoints REST por microservicio
+- [ ] Ejemplos de Request/Response
+- [ ] Flujo completo documentado
 
 ### 3. **`implementacion_detallada.md`** - GUÍA DE IMPLEMENTACIÓN
 **Contenido:**

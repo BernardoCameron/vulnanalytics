@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  worker-scanner:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: vulnanalytics-worker-test
+    privileged: true 
+    command: ["tail", "-f", "/dev/null"]
+    volumes:
+      - ./app:/usr/src/worker/app

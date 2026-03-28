@@ -1,0 +1,20 @@
+# configuracion de ides locales
+.idea/
+.vscode/
+
+# python / worker
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+
+# salidas temporales de auditoria
+audit_report.json
+scan_result.json
+
+# futuro: java spring boot y react
+target/
+node_modules/
+dist/
+build/
